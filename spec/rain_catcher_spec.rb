@@ -15,7 +15,9 @@ RSpec.describe RainCatcher do
     it 'logs on request process event' do
       expect(logger).to receive(:info)
       RainCatcher::Railtie.initializers.first.block.call
-      ActiveSupport::Notifications.instrument('process_action.action_controller')
+      ActiveSupport::Notifications.instrument(
+        'process_action.action_controller'
+      )
     end
   end
 end

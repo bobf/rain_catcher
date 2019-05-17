@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
+require 'rspec/its'
 require 'rain_catcher'
 
 RSpec.configure do |config|

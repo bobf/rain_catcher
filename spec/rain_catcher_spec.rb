@@ -5,7 +5,17 @@ RSpec.describe RainCatcher do
     expect(RainCatcher::VERSION).not_to be nil
   end
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+  let(:logger) { double }
+
+  describe 'event logging' do
+    before do
+      allow(Rails).to receive(:logger) { logger }
+    end
+
+    it 'logs on request process event' do
+      expect(logger).to receive(:info)
+      RainCatcher::Railtie.initializers.first.block.call
+      ActiveSupport::Notifications.instrument('process_action.action_controller')
+    end
   end
 end

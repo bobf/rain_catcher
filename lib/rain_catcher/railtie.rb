@@ -4,51 +4,40 @@ module RainCatcher
   class Railtie < Rails::Railtie
     initializer :rain_catcher do
       notifications.subscribe('process_action.action_controller') do |_args|
-        log_if_interval_elapsed
+        subscriber.log_if_interval_elapsed
       end
     end
 
-    private
+    class << self
+      private
 
-    def notifications
-      ActiveSupport::Notifications
-    end
+      def subscriber
+        @subscriber ||= RainCatcher::Subscriber.new(
+          interval: interval,
+          log_level: log_level,
+          application_name: application_name,
+          environment: Rails.env.to_s
+        )
+      end
 
-    def log_if_interval_elapsed
-      return unless elapsed?
+      def notifications
+        ActiveSupport::Notifications
+      end
 
-      Rails.logger.send(level, queue_data.to_json)
-      @last_logged = Time.now.utc
-    end
+      def interval
+        ENV.fetch('RAIN_CATCHER_LOG_INTERVAL', '30').to_i
+      end
 
-    def queue_data
-      Raindrops::ListenStats.new(0, 0).to_h.merge(
-        source: 'rain_catcher',
-        application: application_name,
-        environment: Rails.env.to_s
-      )
-    end
+      def log_level
+        ENV.fetch('RAIN_CATCHER_LOG_LEVEL', 'INFO')
+      end
 
-    def elapsed?
-      return true if @last_logged.nil?
-      return true if (Time.now.utc - @last_logged).seconds >= interval
-
-      false
-    end
-
-    def interval
-      @interval ||= ENV.fetch('RAIN_CATCHER_LOG_INTERVAL', '30').to_i
-    end
-
-    def level
-      @level ||= ENV.fetch('RAIN_CATCHER_LOG_LEVEL', 'INFO').downcase.to_sym
-    end
-
-    def application_name
-      @application_name ||= ENV.fetch(
-        'RAIN_CATCHER_APPLICATION_NAME',
-        Rails.application.class.name.split('::').first.downcase
-      )
+      def application_name
+        ENV.fetch(
+          'RAIN_CATCHER_APPLICATION_NAME',
+          Rails.application.class.name.split('::').first.downcase
+        )
+      end
     end
   end
 end

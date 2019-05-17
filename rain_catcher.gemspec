@@ -9,6 +9,7 @@ Gem::Specification.new do |spec|
   spec.version       = RainCatcher::VERSION
   spec.authors       = ['Bob Farrell']
   spec.email         = ['robertanthonyfarrell@gmail.com']
+  spec.licenses      = ['MIT']
 
   spec.summary       = 'Automatically log Raindrops statistics'
   spec.description   = 'Rails application statistic logging with Raindrops'

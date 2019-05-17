@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rain_catcher (0.1.1)
+    rain_catcher (0.1.2)
       rails (~> 5.0)
       raindrops (~> 0.19.0)
 

@@ -23,7 +23,7 @@ When each request is processed, if the configured interval has elapsed then a lo
 
 The default log level is `INFO`. This can be overridden by the environment variable `RAIN_CATCHER_LOG_LEVEL`
 
-| Variable | Default Value | Meaning
+| Variable | Default Value | Meaning |
 |-|-|
 | `RAIN_CATCHER_LOG_INTERVAL` | 30 | Minimum number of seconds between each log entry |
 | `RAIN_CATCHER_LOG_LEVEL` | INFO | Log level to use for log entries |

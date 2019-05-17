@@ -1,13 +1,13 @@
 # RainCatcher
 
-_RainCatcher_ utilises the [raindrops](https://bogomips.org/raindrops/) statistics tool to automatically log queue data for _Rack_ web servers (e.g. [Unicorn](https://bogomips.org/unicorn/) for _Rails_.
+_RainCatcher_ utilises the [raindrops](https://bogomips.org/raindrops/) statistics tool to automatically log queue data for _Rack_ web servers (e.g. [Unicorn](https://bogomips.org/unicorn/)) running _Rails_.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'rain_catcher', '~> 0.1.2'
+gem 'rain_catcher', '~> 0.1.3'
 ```
 
 And rebuild your bundle:

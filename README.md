@@ -21,8 +21,6 @@ _RainCatcher_ automatically adds a hook into all web requests made to your appli
 
 When each request is processed, if the configured interval has elapsed then a log entry will be made.
 
-The default log level is `INFO`. This can be overridden by the environment variable `RAIN_CATCHER_LOG_LEVEL`
-
 | Variable | Default Value | Meaning |
 |-|-|-|
 | `RAIN_CATCHER_LOG_INTERVAL` | 30 | Minimum number of seconds between each log entry |

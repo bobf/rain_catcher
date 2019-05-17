@@ -22,7 +22,11 @@ module RainCatcher
     end
 
     def queue_data
-      Raindrops::ListenStats.new(0, 0).to_h.merge(source: 'rain_catcher')
+      Raindrops::ListenStats.new(0, 0).to_h.merge(
+        source: 'rain_catcher',
+        application: application_name,
+        environment: Rails.env.to_s
+      )
     end
 
     def elapsed?
@@ -38,6 +42,13 @@ module RainCatcher
 
     def level
       @level ||= ENV.fetch('RAIN_CATCHER_LOG_LEVEL', 'INFO').downcase.to_sym
+    end
+
+    def application_name
+      @application_name ||= ENV.fetch(
+        'RAIN_CATCHER_APPLICATION_NAME',
+        Rails.application.class.name.split('::').first.downcase
+      )
     end
   end
 end

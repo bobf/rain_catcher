@@ -25,3 +25,12 @@ When each request is processed, if the configured interval has elapsed then a lo
 |-|-|-|
 | `RAIN_CATCHER_LOG_INTERVAL` | 30 | Minimum number of seconds between each log entry |
 | `RAIN_CATCHER_LOG_LEVEL` | INFO | Log level to use for log entries |
+| `RAIN_CATCHER_APPLICATION_NAME` | [inferred from Rails] | Application identifier which will be included in all log entries |
+
+## Log Structure
+
+Log entries are output as _JSON_. For example:
+
+```json
+{"active":5,"queued":2,"source":"rain_catcher","application":"myapp","environment":"production"}
+```

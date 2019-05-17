@@ -13,3 +13,5 @@
 # vim artefacts
 *.swo
 *.swp
+
+*.gem

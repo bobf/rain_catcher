@@ -8,36 +8,34 @@ module RainCatcher
       end
     end
 
-    class << self
-      private
+    private
 
-      def subscriber
-        @subscriber ||= RainCatcher::Subscriber.new(
-          interval: interval,
-          log_level: log_level,
-          application_name: application_name,
-          environment: Rails.env.to_s
-        )
-      end
+    def subscriber
+      @subscriber ||= RainCatcher::Subscriber.new(
+        interval: interval,
+        log_level: log_level,
+        application_name: application_name,
+        environment: Rails.env.to_s
+      )
+    end
 
-      def notifications
-        ActiveSupport::Notifications
-      end
+    def notifications
+      ActiveSupport::Notifications
+    end
 
-      def interval
-        ENV.fetch('RAIN_CATCHER_LOG_INTERVAL', '30').to_i
-      end
+    def interval
+      ENV.fetch('RAIN_CATCHER_LOG_INTERVAL', '30').to_i
+    end
 
-      def log_level
-        ENV.fetch('RAIN_CATCHER_LOG_LEVEL', 'INFO')
-      end
+    def log_level
+      ENV.fetch('RAIN_CATCHER_LOG_LEVEL', 'INFO')
+    end
 
-      def application_name
-        ENV.fetch(
-          'RAIN_CATCHER_APPLICATION_NAME',
-          Rails.application.class.name.split('::').first.downcase
-        )
-      end
+    def application_name
+      ENV.fetch(
+        'RAIN_CATCHER_APPLICATION_NAME',
+        Rails.application.class.name.split('::').first.downcase
+      )
     end
   end
 end

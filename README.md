@@ -7,7 +7,7 @@ _RainCatcher_ utilises the [raindrops](https://bogomips.org/raindrops/) statisti
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'rain_catcher', '~> 0.1.3'
+gem 'rain_catcher', '~> 0.2.0'
 ```
 
 And rebuild your bundle:

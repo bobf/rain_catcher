@@ -16,3 +16,5 @@
 
 *.gem
 .byebug_history
+
+Gemfile.lock

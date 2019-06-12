@@ -10,6 +10,7 @@ RSpec.describe RainCatcher do
   describe 'event logging' do
     before do
       allow(Rails).to receive(:logger) { logger }
+      stub_raindrops
     end
 
     it 'logs on request process event' do

@@ -5,6 +5,7 @@ RSpec.describe RainCatcher::Subscriber do
 
   before do
     allow(Rails).to receive(:logger) { logger }
+    stub_raindrops
   end
 
   let(:logger) { double }

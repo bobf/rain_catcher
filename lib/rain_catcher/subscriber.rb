@@ -13,14 +13,19 @@ module RainCatcher
     def log_if_interval_elapsed
       return unless elapsed?
 
-      Rails.logger.send(@log_level, queue_data.to_json)
+      data = queue_data
+      return if data.nil?
+
+      Rails.logger.send(@log_level, data.to_json)
       @last_logged = Time.now.utc
     end
 
     private
 
     def queue_data
-      Raindrops::ListenStats.new(0, 0).to_h.merge(
+      return nil unless Raindrops::Linux.respond_to?(:tcp_listener_stats)
+
+      Raindrops::Linux.tcp_listener_stats.to_h.merge(
         source: 'rain_catcher',
         application: @application_name,
         environment: @environment

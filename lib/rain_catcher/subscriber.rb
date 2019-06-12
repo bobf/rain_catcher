@@ -29,7 +29,7 @@ module RainCatcher
       listener = Unicorn.listener_names.first
       return nil if listener.nil?
 
-      Raindrops::Linux.tcp_listener_stats[listener]&.merge(
+      Raindrops::Linux.tcp_listener_stats[listener]&.to_h&.merge(
         source: 'rain_catcher',
         application: @application_name,
         environment: @environment

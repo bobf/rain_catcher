@@ -23,9 +23,13 @@ module RainCatcher
     private
 
     def queue_data
+      return nil unless defined?(Unicorn)
       return nil unless Raindrops::Linux.respond_to?(:tcp_listener_stats)
 
-      Raindrops::Linux.tcp_listener_stats.to_h.merge(
+      listener = Unicorn.listener_names.first
+      return nil if listener.nil?
+
+      Raindrops::Linux.tcp_listener_stats[listener]&.merge(
         source: 'rain_catcher',
         application: @application_name,
         environment: @environment

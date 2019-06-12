@@ -6,6 +6,13 @@ require 'rain_catcher'
 
 Dir[File.join(__dir__, 'support', '**', '*.rb')].each { |f| require f }
 
+# See spec/support/raindrops_stubbing.rb
+module Unicorn
+  def self.listener_names
+    ['0.0.0.0:8080']
+  end
+end
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'

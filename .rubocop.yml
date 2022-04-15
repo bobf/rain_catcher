@@ -8,3 +8,4 @@ Metrics/BlockLength:
 AllCops:
   Exclude:
     - 'bin/**/*'
+  NewCops: enable
